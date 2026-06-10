@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Jurusan;
 use App\Http\Requests\JurusanRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class JurusanController extends Controller
 {
@@ -41,5 +42,24 @@ class JurusanController extends Controller
     {
         $jurusan->delete();
         return redirect()->route('jurusan.index')->with('success', 'Jurusan dihapus');
+    }
+
+    public function exportExcel()
+    {
+        $jurusans = Jurusan::orderBy('id_jurusan', 'desc')->get();
+
+        return response()
+            ->view('jurusan.excel', compact('jurusans'))
+            ->header('Content-Type', 'application/vnd.ms-excel')
+            ->header('Content-Disposition', 'attachment; filename="jurusans.xls"');
+    }
+
+    public function exportPdf()
+    {
+        $jurusans = Jurusan::orderBy('id_jurusan', 'desc')->get();
+
+        $pdf = Pdf::loadView('jurusan.print', compact('jurusans'));
+
+        return $pdf->download('jurusans.pdf');
     }
 }

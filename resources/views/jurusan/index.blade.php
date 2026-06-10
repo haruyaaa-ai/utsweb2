@@ -5,6 +5,8 @@
   <h4>Jurusan</h4>
   <div>
     <a href="{{ route('jurusan.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+    <a href="{{ route('jurusan.exportExcel') }}" class="btn btn-sm btn-success">Export Excel</a>
+    <a href="{{ route('jurusan.exportPdf') }}" class="btn btn-sm btn-danger">Export PDF</a>
   </div>
 </div>
 

@@ -31,6 +31,8 @@
   </tbody>
   </table>
 
+  <a href="{{ route('mahasiswa.print') }}" target="_blank" class="btn btn-sm btn-info">Export PDF</a>
+  <a href="{{ route('mahasiswa.exportCsv') }}" class="btn btn-sm btn-success">Export CSV</a>
 {{ $mahasiswas->links() }}
 
 @endsection

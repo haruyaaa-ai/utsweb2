@@ -27,3 +27,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', function () {
     return redirect()->route('dashboard');
 })->middleware('auth');
+
+// proteksi halaman mahasiswa
+Route::middleware('auth')->group(function () {
+
+    Route::get('/mahasiswa/export-csv', [MahasiswaController::class, 'exportCsv'])->name('mahasiswa.exportCsv');
+    Route::get('/mahasiswa/print', [MahasiswaController::class, 'print'])->name('mahasiswa.print');
+    Route::get('/jurusan/export-excel', [JurusanController::class, 'exportExcel'])->name('jurusan.exportExcel');
+    Route::get('/jurusan/export-pdf', [JurusanController::class, 'exportPdf'])->name('jurusan.exportPdf');
+    Route::resource('mahasiswa', MahasiswaController::class);
+});
